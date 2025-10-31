@@ -149,3 +149,84 @@ print('null space of matrix A:-', nullspace)
 ```
 
 ```
+# finding columnspace and rowspace
+
+NR=int(input('enter no. of rows:-'))
+NC=int(input('enter no. of columns:-'))
+entries= list(map(float,input().split()))
+A=np.array(entries).reshape(NR,NC)
+
+m_columnspace= Matrix(A).columnspace()
+m_rowspace= Matrix(A).rowspace()
+
+print('columnspace of matrix A:-', m_columnspace)
+print('rowspace of matrix A:-', m_rowspace)
+```
+
+
+```
+# checking linear dependence of vectors and generate a linear combination of given vectors of matrices
+NR=int(input('enter no. of rows:-'))
+NC=int(input('enter no. of columns:-'))
+entries= list(map(float,input().split()))
+A_numpy=np.array(entries).reshape(NR,NC)
+A_sympy = Matrix(A_numpy)
+
+n=int(input('enter no. of vectors:-'))
+print('enter vectors:-')
+
+rank= A_sympy.rank()
+if rank<n:
+  print('vectors are linearly dependent')
+else:
+  print('vectors are linearly independent')
+
+print('linear combination:-')
+print('enter coefficients for linear combination:-')
+
+coeffs= list(map(float,input().split()))
+result= sum(c*A_sympy.row(i) for i, c in enumerate(coeffs))
+print(f'result:- {result}')
+
+if A_sympy.shape[0]==A_sympy.shape[1] and rank==n:
+  print('transition matrix:-', A_sympy.inv())
+```
+
+
+
+```
+# Finding the orthonormal basis of given vector space using gram-schmidt orthogonalization process
+
+n=int(input('enter no. of vectors:-'))
+print('enter vectors:-')
+vectors=[]
+dim=int(input('enter dimension of each vector:-'))
+for i in range(n):
+  print(f'enter vector {i+1} elements separated by space:-')
+  vec=list(map(float,input().split()))
+  vectors.append(vec)
+NR=int(input('enter no. of rows:-'))
+NC=int(input('enter no. of columns:-'))
+entries= list(map(float,input().split()))
+A_numpy=np.array(entries).reshape(NR,NC)
+A_sympy=Matrix(A_numpy)
+
+orthogonal=[]
+orthonormal=[]
+for i in range(n):
+  v=A_numpy[i]
+  u=v
+  for j in range(i):
+    proj= v.dot(orthogonal[j]/orthogonal[j].dot(orthogonal[j]))
+    u=u-proj
+  orthogonal.append(u) # Append the orthogonal vector after computing it
+  norm= sqrt(u.dot(u))
+  orthonormal.append(np.array(simplify(u/norm)).T)
+print('orthonormal basis')
+
+for i, entries in enumerate(orthonormal):
+       print(f"u{i+1}={entries}")
+```
+
+
+```
