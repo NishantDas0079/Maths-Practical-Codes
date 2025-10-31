@@ -230,3 +230,142 @@ for i, entries in enumerate(orthonormal):
 
 
 ```
+# checking the diagonizable property of matrices and finding the corresponding wife values and verify cayley Hamilton theorem
+
+import numpy as np
+import sympy as sp
+
+NR= int(input("Enter the number of rows:"))
+NC= int(input("Enter the number of columns:"))
+print("Enter the entries in a single line (seperated by space)")
+entries = list (map(int, input().split()))
+A=np.array(entries).reshape(NR,NC)
+
+M = sp.Matrix(A)
+try:
+    P, D = M.diagonalize()
+    print("Matrix is diagonalizable.")
+    print("\nP (Eigenvectors):\n", P)
+    print("\nD (Diagonal Matrix of Eigenvalues):\n", D)
+except:
+    print("Matrix is not diagonalizable.")
+
+    p = M.charpoly()
+    print("\nCharacteristic Polynomial:", p.as_expr())
+    print("Verifying Cayley-Hamilton Theorem...")
+    cayley_hamilton_result = p.eval(M)
+    print("p(A) =\n", cayley_hamilton_result)
+    if cayley_hamilton_result == sp.zeros(*M.shape):
+        print("Cayley-Hamilton theorem verified successfully!")
+    else:
+        print("Cayley-Hamilton theorem not satisfied (possible rounding or symbolic issue).")
+```
+
+
+```
+# Linear algebra :- Coding and Decoding of message using non singular matrices.
+
+mod = 257
+NR= int(input("Enter the number of rows:"))
+NC= int(input("Enter the number of columns:"))
+print("Enter the entries in a single line (seperated by space)")
+entries = list (map(int, input().split()))
+A=np.array(entries).reshape(NR,NC)
+
+def encode(msg):
+    v = [ord(c) for c in msg]
+    while len(v) % 3: v.append(0)
+    res = []
+    for i in range(0, len(v), 3):
+        b = np.array(v[i:i+3])
+        c = (A @ b) % mod
+        res += list(c)
+    return res
+
+def decode(codes):
+    Kinv = np.array(Matrix(A).inv_mod(mod)).astype(int)
+    res = []
+    for i in range(0, len(codes), 3):
+        b = np.array(codes[i:i+3])
+        p = (Kinv @ b) % mod
+        res += list(p)
+    return ''.join(chr(x) for x in res if x != 0)
+
+msg = "Linear algebra is fun"
+enc = encode(msg)
+dec = decode(enc)
+print("Encoded:", enc)
+print("Decoded:", dec)
+```
+
+
+```
+# gradient of vector field
+
+x, y, z = sp.symbols('x y z')
+expr_input = input("Enter scalar function f(x,y,z) [default: x**2*y + sin(z)]: ").strip()
+if expr_input == "":
+    expr_input = "x**2*y + sin(z)"
+f = sp.sympify(expr_input)
+df_dx = sp.diff(f, x)
+df_dy = sp.diff(f, y)
+df_dz = sp.diff(f, z)
+print("\nFunction f(x,y,z) =", f)
+print("Gradient ∇f = [∂f/∂x, ∂f/∂y, ∂f/∂z]")
+print("∂f/∂x =", df_dx)
+print("∂f/∂y =", df_dy)
+print("∂f/∂z =", df_dz)
+```
+
+
+
+```
+# divergence of vector field
+
+x, y, z = sp.symbols('x y z')
+P = input("Enter P(x,y,z) [default: x*y]: ").strip()
+Q = input("Enter Q(x,y,z) [default: y*z]: ").strip()
+R = input("Enter R(x,y,z) [default: z*x]: ").strip()
+
+if P == "": P = "x*y"
+if Q == "": Q = "y*z"
+if R == "": R = "z*x"
+
+P = sp.sympify(P)
+Q = sp.sympify(Q)
+R = sp.sympify(R)
+div = sp.diff(P, x) + sp.diff(Q, y) + sp.diff(R, z)
+print("\nVector Field F =", (P, Q, R))
+print("Divergence ∇·F =", sp.simplify(div))
+
+
+
+```
+# curl of a vector field
+
+x, y, z = sp.symbols('x y z')
+
+P = input("Enter P(x,y,z) [default: y*z]: ").strip()
+Q = input("Enter Q(x,y,z) [default: z*x]: ").strip()
+R = input("Enter R(x,y,z) [default: x*y]: ").strip()
+
+if P == "": P = "y*z"
+if Q == "": Q = "z*x"
+if R == "": R = "x*y"
+
+P = sp.sympify(P)
+Q = sp.sympify(Q)
+R = sp.sympify(R)
+
+curl_x = sp.diff(R, y) - sp.diff(Q, z)
+curl_y = sp.diff(P, z) - sp.diff(R, x)
+curl_z = sp.diff(Q, x) - sp.diff(P, y)
+
+print("\nVector Field F =", (P, Q, R))
+print("Curl ∇×F = [∂R/∂y - ∂Q/∂z, ∂P/∂z - ∂R/∂x, ∂Q/∂x - ∂P/∂y]")
+print("∂R/∂y - ∂Q/∂z =", curl_x)
+print("∂P/∂z - ∂R/∂x =", curl_y)
+print("∂Q/∂x - ∂P/∂y =", curl_z)
+```
+
+
