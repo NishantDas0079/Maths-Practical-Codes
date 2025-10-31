@@ -78,3 +78,23 @@ except np.linalg.LinAlgError:
 
 
 ```
+# solving homogeneous system of equation using gauss elimination
+
+NR= int(input('enter no. of rows:-'))
+NC=int(input('enter no. of columns:-'))
+elements=[]
+print('enter elements row by row:-')
+for i in range(NR):
+  row=list(map(float,input().split())) # Use float to avoid type issues later
+  elements.append(row)
+A_sympy= Matrix(elements) # Keep the SymPy matrix for potential future use
+A_numpy = np.array(elements, dtype=np.float64) # Convert to NumPy array with float type
+print('user defined matrix (SymPy):-', A_sympy)
+print('user defined matrix (NumPy):-', A_numpy)
+
+Constant_Matrix= np.zeros(NR)
+X= np.linalg.solve(A_numpy, Constant_Matrix)
+print('UNIQUE SOLUTION:-', X)
+```
+
+```
