@@ -25,7 +25,7 @@ for i in range(NR):
   NR=list(map(float,input().split()))
   elements.append(NR)
 A= np.array(elements)
-A=Matrix(A)
+A=sp.Matrix(A)
 print('user defdined matrix:-')
 
 echelon= A.echelon_form()
@@ -44,7 +44,7 @@ print('enter elements row by row:-')
 for i in range(NR):
   row=list(map(float,input().split())) # Use float to avoid type issues later
   elements.append(row)
-A_sympy= Matrix(elements) # Keep the SymPy matrix for potential future use
+A_sympy= sp.Matrix(elements) 
 A_numpy = np.array(elements, dtype=np.float64) # Convert to NumPy array with float type
 print('user defined matrix (SymPy):-', A_sympy)
 print('user defined matrix (NumPy):-', A_numpy)
@@ -87,7 +87,7 @@ print('enter elements row by row:-')
 for i in range(NR):
   row=list(map(float,input().split())) # Use float to avoid type issues later
   elements.append(row)
-A_sympy= Matrix(elements) # Keep the SymPy matrix for potential future use
+A_sympy= sp.Matrix(elements) 
 A_numpy = np.array(elements, dtype=np.float64) # Convert to NumPy array with float type
 print('user defined matrix (SymPy):-', A_sympy)
 print('user defined matrix (NumPy):-', A_numpy)
@@ -107,7 +107,7 @@ print('enter elements row by row:-')
 for i in range(NR):
   row=list(map(float,input().split())) # Use float to avoid type issues later
   elements.append(row)
-A_sympy= Matrix(elements) # Keep the SymPy matrix for potential future use
+A_sympy= sp.Matrix(elements) 
 A_numpy = np.array(elements, dtype=np.float64) # Convert to NumPy array with float type
 print('user defined matrix (SymPy):-', A_sympy)
 print('user defined matrix (NumPy):-', A_numpy)
@@ -133,7 +133,7 @@ print('enter elements row by row:-')
 for i in range(NR):
   row=list(map(float,input().split())) # Use float to avoid type issues later
   elements.append(row)
-A_sympy= Matrix(elements) # Keep the SymPy matrix for potential future use
+A_sympy= sp.Matrix(elements) 
 A_numpy = np.array(elements, dtype=np.float64) # Convert to NumPy array with float type
 print('user defined matrix (SymPy):-', A_sympy)
 print('user defined matrix (NumPy):-', A_numpy)
@@ -156,8 +156,8 @@ NC=int(input('enter no. of columns:-'))
 entries= list(map(float,input().split()))
 A=np.array(entries).reshape(NR,NC)
 
-m_columnspace= Matrix(A).columnspace()
-m_rowspace= Matrix(A).rowspace()
+m_columnspace= sp.Matrix(A).columnspace()
+m_rowspace= sp.Matrix(A).rowspace()
 
 print('columnspace of matrix A:-', m_columnspace)
 print('rowspace of matrix A:-', m_rowspace)
@@ -170,7 +170,7 @@ NR=int(input('enter no. of rows:-'))
 NC=int(input('enter no. of columns:-'))
 entries= list(map(float,input().split()))
 A_numpy=np.array(entries).reshape(NR,NC)
-A_sympy = Matrix(A_numpy)
+A_sympy = sp.Matrix(A_numpy)
 
 n=int(input('enter no. of vectors:-'))
 print('enter vectors:-')
@@ -209,7 +209,7 @@ NR=int(input('enter no. of rows:-'))
 NC=int(input('enter no. of columns:-'))
 entries= list(map(float,input().split()))
 A_numpy=np.array(entries).reshape(NR,NC)
-A_sympy=Matrix(A_numpy)
+A_sympy=sp.Matrix(A_numpy)
 
 orthogonal=[]
 orthonormal=[]
