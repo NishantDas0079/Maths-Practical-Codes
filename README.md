@@ -125,3 +125,27 @@ print(solution)
 
 
 ```
+# finding null space and nullity of matrix
+NR= int(input('enter no. of rows:-'))
+NC=int(input('enter no. of columns:-'))
+elements=[]
+print('enter elements row by row:-')
+for i in range(NR):
+  row=list(map(float,input().split())) # Use float to avoid type issues later
+  elements.append(row)
+A_sympy= Matrix(elements) # Keep the SymPy matrix for potential future use
+A_numpy = np.array(elements, dtype=np.float64) # Convert to NumPy array with float type
+print('user defined matrix (SymPy):-', A_sympy)
+print('user defined matrix (NumPy):-', A_numpy)
+
+nullspace = A_sympy.nullspace()
+# nullspace=Matrix() # This line seems unnecessary, so I've commented it out
+
+NoC= A_numpy.shape[1]
+rank = A_sympy.rank()
+nullity= NoC-rank
+print('nullity of matrix A:-', nullity)
+print('null space of matrix A:-', nullspace)
+```
+
+```
