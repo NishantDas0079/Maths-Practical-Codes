@@ -337,6 +337,7 @@ R = sp.sympify(R)
 div = sp.diff(P, x) + sp.diff(Q, y) + sp.diff(R, z)
 print("\nVector Field F =", (P, Q, R))
 print("Divergence ∇·F =", sp.simplify(div))
+```
 
 
 
