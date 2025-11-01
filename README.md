@@ -166,32 +166,24 @@ print('rowspace of matrix A:-', m_rowspace)
 
 ```
 # checking linear dependence of vectors and generate a linear combination of given vectors of matrices
-NR=int(input('enter no. of rows:-'))
-NC=int(input('enter no. of columns:-'))
-entries= list(map(float,input().split()))
-A_numpy=np.array(entries).reshape(NR,NC)
-A_sympy = sp.Matrix(A_numpy)
 
-n=int(input('enter no. of vectors:-'))
-print('enter vectors:-')
-
-rank= A_sympy.rank()
-if rank<n:
-  print('vectors are linearly dependent')
+NR= int(input("Enter the number of rows:"))
+NC= int(input("Enter the number of columns:"))
+print("Enter the entries in a single line (seperated by space)")
+entries = list (map(int, input().split()))
+A=np.array(entries).reshape(NR,NC)
+A=sp.Matrix(A)
+rank = A.rank()
+print(f"\nRank = {rank}")
+if rank == NC:
+    print("Linearly independent.")
 else:
-  print('vectors are linearly independent')
-
-print('linear combination:-')
-print('enter coefficients for linear combination:-')
-
-coeffs= list(map(float,input().split()))
-result= sum(c*A_sympy.row(i) for i, c in enumerate(coeffs))
-print(f'result:- {result}')
-
-if A_sympy.shape[0]==A_sympy.shape[1] and rank==n:
-  print('transition matrix:-', A_sympy.inv())
+    print("Linearly dependent.")
+    ns = A.nullspace()
+    for v in ns:
+        expr = " + ".join([f"({v[i]})v{i+1}" for i in range(NC)]) + " = 0"
+        print(expr)
 ```
-
 
 
 ```
