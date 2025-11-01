@@ -245,37 +245,31 @@ except:
 ```
 # Linear algebra :- Coding and Decoding of message using non singular matrices.
 
-mod = 257
-NR= int(input("Enter the number of rows:"))
-NC= int(input("Enter the number of columns:"))
-print("Enter the entries in a single line (seperated by space)")
-entries = list (map(int, input().split()))
-A=np.array(entries).reshape(NR,NC)
+import math
+from sympy import Matrix
 
-def encode(msg):
-    v = [ord(c) for c in msg]
-    while len(v) % 3: v.append(0)
-    res = []
-    for i in range(0, len(v), 3):
-        b = np.array(v[i:i+3])
-        c = (A @ b) % mod
-        res += list(c)
-    return res
+msg = "LINEAR algebra is FUN"
+# prepare numeric vector: A=1..Z=26, other -> 0 (space/pad)
+nums = [ord(c.upper())-64 if c.isalpha() else 0 for c in msg]
+# pad to multiple of 3
+pad = (-len(nums)) % 3
+nums += [0]*pad
 
-def decode(codes):
-    Kinv = np.array(Matrix(A).inv_mod(mod)).astype(int)
-    res = []
-    for i in range(0, len(codes), 3):
-        b = np.array(codes[i:i+3])
-        p = (Kinv @ b) % mod
-        res += list(p)
-    return ''.join(chr(x) for x in res if x != 0)
+K = Matrix([[2,3,1],[1,1,1],[1,2,2]])
+Kinv = K.inv()
 
-msg = "Linear algebra is fun"
-enc = encode(msg)
-dec = decode(enc)
-print("Encoded:", enc)
-print("Decoded:", dec)
+# break into blocks of 3 and encode each block (no reshape)
+blocks = [Matrix(nums[i:i+3]) for i in range(0, len(nums), 3)]
+encoded_blocks = [K * b for b in blocks]
+encoded = [int(x) for B in encoded_blocks for x in list(B)]
+print("Encoded:", encoded)
+
+# decode blockwise and reassemble
+decoded_blocks = [Kinv * B for B in encoded_blocks]
+decoded_nums = [round(int(x)) if float(x).is_integer() else round(float(x)) 
+                for D in decoded_blocks for x in list(D)]
+decoded_text = ''.join(chr(n+64) if 1 <= n <= 26 else ' ' for n in decoded_nums).strip()
+print("Decoded:", decoded_text)
 ```
 
 
