@@ -189,35 +189,23 @@ else:
 ```
 # Finding the orthonormal basis of given vector space using gram-schmidt orthogonalization process
 
-n=int(input('enter no. of vectors:-'))
-print('enter vectors:-')
-vectors=[]
-dim=int(input('enter dimension of each vector:-'))
-for i in range(n):
-  print(f'enter vector {i+1} elements separated by space:-')
-  vec=list(map(float,input().split()))
-  vectors.append(vec)
-NR=int(input('enter no. of rows:-'))
-NC=int(input('enter no. of columns:-'))
-entries= list(map(float,input().split()))
-A_numpy=np.array(entries).reshape(NR,NC)
-A_sympy=sp.Matrix(A_numpy)
 
-orthogonal=[]
-orthonormal=[]
-for i in range(n):
-  v=A_numpy[i]
-  u=v
-  for j in range(i):
-    proj= v.dot(orthogonal[j]/orthogonal[j].dot(orthogonal[j]))
-    u=u-proj
-  orthogonal.append(u) # Append the orthogonal vector after computing it
-  norm= sqrt(u.dot(u))
-  orthonormal.append(np.array(simplify(u/norm)).T)
-print('orthonormal basis')
+n = int(input("Enter vector dimension: "))
+print("Enter 3 vectors (each with", n, "elements):")
+v = [np.array(list(map(float, input().split()))) for _ in range(3)]
 
-for i, entries in enumerate(orthonormal):
-       print(f"u{i+1}={entries}")
+# Gram-Schmidt process
+u = [v[0]]
+u.append(v[1] - np.dot(v[1], u[0]) / np.dot(u[0], u[0]) * u[0])
+u.append(v[2] - sum(np.dot(v[2], ui) / np.dot(ui, ui) * ui for ui in u[:2]))
+
+# Normalize
+e = [ui / np.linalg.norm(ui) for ui in u]
+
+# Output
+print("\nOrthonormal basis vectors:")
+for i, ei in enumerate(e, 1):
+    print(f"e{i} =", np.round(ei, 4))
 ```
 
 
