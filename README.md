@@ -30,9 +30,8 @@ print('user defdined matrix:-')
 
 echelon= A.echelon_form()
 rank= A.rank()
-B=Matrix(echelon)
 
-print('echelon form :-',B)
+print('echelon form :-',echelon)
 print('rank:-', rank)
 ```
 
