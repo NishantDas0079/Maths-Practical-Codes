@@ -35,7 +35,7 @@ print('echelon form :-',echelon)
 print('rank:-', rank)
 ```
 
-```                                 # FINDING ADJOINT, INVERSE, COFACTOR AND TRANSPOSE OF MATRIX
+```                                 
 NR= int(input('enter no. of rows:-'))
 NC=int(input('enter no. of columns:-'))
 elements=[]
