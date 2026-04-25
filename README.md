@@ -1,9 +1,9 @@
-```
+```python
 import numpy as np
 import sympy as sp
 ```
 
-```
+```python
 # transpose of vector matrix
 NR=int(input('enter no. of rows:-'))
 NC=int(input('enter no. of columns:-'))
@@ -14,7 +14,7 @@ Transpose= np.transpose(A)
 print('transpose of matrix A:-', Transpose)
 ```
 
-```
+```python
 # ECHELON FORM AND RANK OF A MATRIX
 
 NR= int(input('enter no. of rows:-'))
@@ -35,7 +35,7 @@ print('echelon form :-',echelon)
 print('rank:-', rank)
 ```
 
-```                                 
+```python                                
 NR= int(input('enter no. of rows:-'))
 NC=int(input('enter no. of columns:-'))
 elements=[]
@@ -76,7 +76,7 @@ except np.linalg.LinAlgError:
 ```
 
 
-```
+```python
 # solving homogeneous system of equation using gauss elimination
 
 NR= int(input('enter no. of rows:-'))
@@ -96,7 +96,7 @@ X= np.linalg.solve(A_numpy, Constant_Matrix)
 print('UNIQUE SOLUTION:-', X)
 ```
 
-```
+```python
 # SOLVING homogeneous system using gauss jordan
 
 NR= int(input('enter no. of rows:-'))
@@ -123,7 +123,7 @@ print(solution)
 ```
 
 
-```
+```python
 # finding null space and nullity of matrix
 NR= int(input('enter no. of rows:-'))
 NC=int(input('enter no. of columns:-'))
@@ -147,7 +147,7 @@ print('nullity of matrix A:-', nullity)
 print('null space of matrix A:-', nullspace)
 ```
 
-```
+```python
 # finding columnspace and rowspace
 
 NR=int(input('enter no. of rows:-'))
@@ -163,7 +163,7 @@ print('rowspace of matrix A:-', m_rowspace)
 ```
 
 
-```
+```python
 # checking linear dependence of vectors and generate a linear combination of given vectors of matrices
 
 NR= int(input("Enter the number of rows:"))
@@ -185,7 +185,7 @@ else:
 ```
 
 
-```
+```python
 # Finding the orthonormal basis of given vector space using gram-schmidt orthogonalization process
 
 
@@ -208,7 +208,7 @@ for i, ei in enumerate(e, 1):
 ```
 
 
-```
+```python
 # checking the diagonizable property of matrices and finding the corresponding wife values and verify cayley Hamilton theorem
 
 import numpy as np
@@ -241,7 +241,7 @@ except:
 ```
 
 
-```
+```python
 # Linear algebra :- Coding and Decoding of message using non singular matrices.
 
 import math
@@ -272,7 +272,7 @@ print("Decoded:", decoded_text)
 ```
 
 
-```
+```python
 # gradient of vector field
 
 x, y, z = sp.symbols('x y z')
@@ -292,7 +292,7 @@ print("∂f/∂z =", df_dz)
 
 
 
-```
+```python
 # divergence of vector field
 
 x, y, z = sp.symbols('x y z')
@@ -314,7 +314,7 @@ print("Divergence ∇·F =", sp.simplify(div))
 
 
 
-```
+```python
 # curl of a vector field
 
 x, y, z = sp.symbols('x y z')
